@@ -3,7 +3,7 @@
 Custom Star Sonata 2 ship shaders which makes all ships to be illuminated from the top, which gives them "C1" / sprite feeling.
 
 #Installation
-Download [mod package](/amorek/ss-shaders/releases/download/v1.0/spritelike-shaders-1-0.zip) into Star Sonata 2 "Content" directory.
+Download [mod package](/amorek/ss-shaders/releases/latest/download/spritelike-shaders.zip) into Star Sonata 2 "Content" directory.
 
 #Known Issues
 * Lion ship does not use ship shader (game bug)
