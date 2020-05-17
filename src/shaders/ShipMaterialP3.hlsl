@@ -41,7 +41,8 @@ float4 pixelMain
 {
 	if (UseNormalMap) {
 		float4 sample = tex2D(NormalMapSampler, TexCoords);
-		float3 peturbation = sample.xyz - float3(0.5, 0.5, 0.5);
+		float3 peturbation = saturate(sample.xyz - float3(0.5, 0.5, 0.5));
+
 		Normal = float3(
 			peturbation.x * Tangent - 
 			peturbation.y * Binormal + 
