@@ -11,7 +11,7 @@ Download [mod package](/amorek/ss-shaders/releases/download/v1.0/spritelike-shad
 
 
 #Screenshots
-![Screenshot 1](images/Screenshot_1.png)
-![Screenshot 2](images/Screenshot_2.png)
-![Screenshot 3](images/Screenshot_3.png)
-![Screenshot 4](images/Screenshot_4.png)
+![Screenshot 1](images/Screenshot_1.jpg)
+![Screenshot 2](images/Screenshot_2.jpg)
+![Screenshot 3](images/Screenshot_3.jpg)
+![Screenshot 4](images/Screenshot_4.jpg)
