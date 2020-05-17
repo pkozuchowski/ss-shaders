@@ -9,7 +9,6 @@ To find the folder quickly type "%appdata%\Star Sonata 2\Content" into path wind
 Shaders only work on Medium, High and Very High graphic settings. Game does not use shaders in rendering on Low settings.
 
 #Known Issues
-* Lion ship may look dark
 * Some stations appear to be black (base model has faces pointing to it's inside)
 
 
