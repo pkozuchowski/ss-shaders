@@ -16,16 +16,6 @@ bool UseNormalMap;
 static const float3 lDir = float3(0,0,1);
 
 
-float3 getLightContribution(float3 Normal)
-{   
-	float diffuse = saturate(dot(Normal, lDir));
-	float3 Reflect = normalize(4.0 * diffuse * Normal - lDir);
-	float specFac = clamp(dot(Reflect, lDir),0, 0.97);
-	float specular = pow(specFac, SpecularExponent);
-
-	return (diffuse + specular);
-}
-
 float4 pixelMain
 (
    float2 TexCoords        : TEXCOORD0,
@@ -50,16 +40,17 @@ float4 pixelMain
 	}
 	/* Interpolated vertex normals might not be normalized. */
 	Normal = normalize(Normal);
-
+		
 	float4 albedoColor = tex2D(ColoredTextureSampler, TexCoords) * DiffuseTint;
 
-	if(DoSphereMapping > 0.5)
-	{
+	if(DoSphereMapping > 0.5)	{
 		float2 refCoords = reflect(View, Normal).xy * 0.5;
 		albedoColor = lerp(albedoColor, tex2D(EnvMapSampler, refCoords), 0.5);
 	}	
 
-	float3 finalLightColor = getLightContribution(Normal);
+
+	float diffuse = clamp(dot(Normal, lDir), 0.25, 1);
+	float3 finalLightColor = diffuse + (AmbientColor / 4);
 
 	float4 finalColor = saturate(albedoColor * float4(finalLightColor.xyz, 1.0));
 	finalColor.a = saturate(DiffuseTint.a);
