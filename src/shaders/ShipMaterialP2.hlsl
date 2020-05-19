@@ -16,6 +16,16 @@ bool UseNormalMap;
 static const float3 lDir = float3(0,0,1);
 
 
+float3 getLightContribution(float3 Normal)
+{   
+	float diffuse = saturate(dot(Normal, lDir));
+	float3 Reflect = normalize(4.0 * diffuse * Normal - lDir);
+	float specFac = saturate(dot(Reflect, lDir));
+	float specular = pow(specFac, SpecularExponent);
+
+	return clamp(diffuse + specular, 0.25, 1);
+}
+
 float4 pixelMain
 (
    float2 TexCoords        : TEXCOORD0,
@@ -48,10 +58,7 @@ float4 pixelMain
 		albedoColor = lerp(albedoColor, tex2D(EnvMapSampler, refCoords), 0.5);
 	}	
 
-
-	float diffuse = clamp(dot(Normal, lDir), 0.25, 1);
-	float3 finalLightColor = diffuse + (AmbientColor / 4);
-
+	float3 finalLightColor = getLightContribution(Normal) + (AmbientColor / 3);
 	float4 finalColor = saturate(albedoColor * float4(finalLightColor.xyz, 1.0));
 	finalColor.a = saturate(DiffuseTint.a);
 

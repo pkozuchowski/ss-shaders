@@ -20,7 +20,7 @@ float3 getLightContribution(float3 Normal)
 {   
 	float diffuse = saturate(dot(Normal, lDir));
 	float3 Reflect = normalize(4.0 * diffuse * Normal - lDir);
-	float specFac = clamp(dot(Reflect, lDir),0, 0.97);
+	float specFac = saturate(dot(Reflect, lDir));
 	float specular = pow(specFac, SpecularExponent);
 
 	return clamp(diffuse + specular, 0.25, 1);
@@ -58,7 +58,7 @@ float4 pixelMain
 		albedoColor = lerp(albedoColor, tex2D(EnvMapSampler, refCoords), 0.5);
 	}	
 
-	float3 finalLightColor = getLightContribution(Normal) + (AmbientColor / 4);
+	float3 finalLightColor = getLightContribution(Normal) + (AmbientColor / 3);
 	float4 finalColor = saturate(albedoColor * float4(finalLightColor.xyz, 1.0));
 	finalColor.a = saturate(DiffuseTint.a);
 
